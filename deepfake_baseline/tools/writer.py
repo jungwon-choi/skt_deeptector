@@ -112,10 +112,10 @@ class Checkpointer():
 <<<<<<< HEAD
         if not os.path.isfile(self.args.ARGS_INFO_PATH):
             with open(self.args.ARGS_INFO_PATH, 'a') as f:
-                f.write("==========       CONFIG      =============")
+                f.write("==========       CONFIG      =============\n")
                 for arg, content in self.args.__dict__.items():
-                    f.write("{:35s}\t: {:}".format(arg, content))
-                f.write("==========     CONFIG END    =============")
+                    f.write("{:35s}\t: {:}\n".format(arg, content))
+                f.write("==========     CONFIG END    =============\n")
 =======
 >>>>>>> 03869faef94679d5fb251d72fb9547c716d00e06
 
