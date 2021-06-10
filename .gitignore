@@ -1,0 +1,12 @@
+# FOLDERS
+__pycache__
+.ipynb_checkpoints
+checkpoints
+logs
+
+# FILES
+*.swp
+*.pkl
+*.jpg
+*.png
+.nfs*
