@@ -75,7 +75,10 @@ class Args():
         os.environ["CUDA_VISIBLE_DEVICES"]=args.gpu_idx
         args.FILE_FORMAT = time.strftime('%y%m%d_%H%M%S_', time.localtime(time.time()))+args.flag
         args.CHECKPOINT_DIR = os.path.join(args.ckpt_path, args.FILE_FORMAT)
+<<<<<<< HEAD
         args.ARGS_INFO_PATH = os.path.join(args.ckpt_path, args.FILE_FORMAT, 'args_info.txt')
+=======
+>>>>>>> 03869faef94679d5fb251d72fb9547c716d00e06
         args.LAST_CHECKPOINT_PATH  = os.path.join(args.ckpt_path, args.FILE_FORMAT, 'last_ckpt')
         args.BEST_CHECKPOINT_PATH  = os.path.join(args.ckpt_path, args.FILE_FORMAT, 'best_ckpt')
         args.FINAL_CHECKPOINT_PATH = os.path.join(args.ckpt_path, args.FILE_FORMAT, 'final_ckpt')
@@ -99,6 +102,10 @@ class Args():
             print("{:35s}\t: {:}".format(arg, content))
         print("==========     CONFIG END    =============")
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 03869faef94679d5fb251d72fb9547c716d00e06
 class TestArgs():
     def __init__(self):
         self.initialized = False

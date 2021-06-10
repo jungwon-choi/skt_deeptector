@@ -109,12 +109,15 @@ class Checkpointer():
             checkpoint_dict['best_score']            = self.writer.best_score
 
         os.makedirs(self.args.CHECKPOINT_DIR, exist_ok=True)
+<<<<<<< HEAD
         if not os.path.isfile(self.args.ARGS_INFO_PATH):
             with open(self.args.ARGS_INFO_PATH, 'a') as f:
                 f.write("==========       CONFIG      =============")
                 for arg, content in self.args.__dict__.items():
                     f.write("{:35s}\t: {:}".format(arg, content))
                 f.write("==========     CONFIG END    =============")
+=======
+>>>>>>> 03869faef94679d5fb251d72fb9547c716d00e06
 
         score = self.writer.val_roc_auc[-1] if score is None else score
         if self.args.earlystop:
