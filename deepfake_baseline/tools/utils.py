@@ -168,11 +168,7 @@ def get_dataset(args, phase='train', domain=None, select_method=None, domain_lab
                         # num_debug_sample=args.num_debug_sample,
                         verbose=args.verbose,
                         # infinite_mode=args.infinite_mode,
-<<<<<<< HEAD
                         attack_test=args.attack_test if 'attack_test' in args.__dict__.keys() else False
-=======
-                        attack_test=args.attack_test
->>>>>>> 03869faef94679d5fb251d72fb9547c716d00e06
                         )
     return dataset
 
@@ -226,6 +222,7 @@ def get_criterion(args):
     elif args.criterion == 'MSE':
         pos_weight = 1./args.fake_over_real if args.weight_balance else 1.
         criterion = Weihgted_MSELoss(weight_balance=args.weight_balance, pos_weight=pos_weight)
+    criterion = criterion.to(args.device)
     return criterion
 
 #===============================================================================

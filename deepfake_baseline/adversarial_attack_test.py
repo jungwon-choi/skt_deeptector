@@ -49,7 +49,7 @@ def main(args):
     #     num_real_framse = len(dataset.all_real_frame_list) if dataset.random_sample_num is None else len(dataset.sampled_real_frame)
     #     num_fake_framse = len(dataset.all_fake_frame_list) if dataset.random_sample_num is None else len(dataset.sampled_fake_frame)
     #     print('{:<6} {:<15}: real {:5d}, fake {:5d}'.format(phase, env_name, num_real_framse, num_fake_framse))
-    print('[Notice] DataLoader ready.')
+    print('[Notice] Dataloader ready.')
 
     # Test adversarial attack
     # images, labels = ep.astensors(*samples(fmodel, dataset="imagenet", batchsize=16))

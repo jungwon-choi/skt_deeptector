@@ -8,7 +8,6 @@ import os
 
 from tools.utils import *
 from tools.iterator import Iterator
-from tools.writer import Checkpointer
 from tools.args import Args
 
 #===============================================================================
@@ -21,7 +20,7 @@ def main(args):
 
     # Build the model
     model = get_model(args)
-    print('[Notice] Model ready.')
+    print('[Notice] Model ready.\n')
 
     # Set environments dataLoaders
     envs = {}
@@ -38,27 +37,10 @@ def main(args):
             num_real_framse = len(dataset.all_real_frame_list) if dataset.random_sample_num is None else len(dataset.sampled_real_frame)
             num_fake_framse = len(dataset.all_fake_frame_list) if dataset.random_sample_num is None else len(dataset.sampled_fake_frame)
             print('{:<6} {:<15}: real {:5d}, fake {:5d}'.format(phase, env_name, num_real_framse, num_fake_framse))
-
-    print('[Notice] DataLoader ready.')
-
-    # Set loss function
-    criterion = get_criterion(args)
-    print('[Notice] Criterion ready.')
-
-    # Set optimizer
-    optimizer = get_optimizer(args, model)
-    print('[Notice] Optimizer ready.')
-
-    # Set scheduler
-    scheduler = get_scheduler(args, optimizer) if args.scheduler is not None else None
-    print('[Notice] Scheduler ready.')
-
-    # Set checkpoint saver
-    cps = Checkpointer(args, model, optimizer)
-    print('[Notice] Checkpointer ready.')
+    print('[Notice] Dataloader ready.\n')
 
     # Set iterator
-    iterator = Iterator(args, model, dataloaders, criterion, optimizer, scheduler, cps)
+    iterator = Iterator(args, model, dataloaders)
     print('[Notice] Iterator ready.')
 
     # Train the model
@@ -70,7 +52,7 @@ def main(args):
         #=======================================================================
         epoch_end = time.time()
         print("[Notice] Epoch elapsed time: {0:.3f} sec".format(epoch_end - epoch_start))
-        if cps.stop_training: break
+        if iterator.checkpointer.stop_training: break
 
     # Test the model
     if args.num_gpus > 0 and (args.local_rank % args.num_gpus == 0):
