@@ -66,6 +66,7 @@ class Args():
         parser.add_argument('--val_freq', type=int, default=2000)
         parser.add_argument('--gpu_idx', type=str, default=None)
         parser.add_argument('--norecord', action='store_true')
+        parser.add_argument('--test_only', action='store_true')
         parser.add_argument('--resume', action='store_true')
         parser.add_argument('--seed', type=int, default=0)
         parser.add_argument('--flag', type=str, default=None)
@@ -139,6 +140,7 @@ class TestArgs():
         parser.add_argument('--seed', type=int, default=0)
         parser.add_argument('--gpu_idx', type=str, default=None)
         parser.add_argument('--attack_test', action='store_true')
+        parser.add_argument('--test_only', action='store_true')
         parser.add_argument('--verbose', action='store_true')
         args = parser.parse_args()
 

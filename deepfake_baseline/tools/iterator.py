@@ -14,10 +14,11 @@ class Iterator():
         self.model = model
         self.device = args.device
         self.dataloaders = dataloaders
-        self.criterion = get_criterion(args) if criterion is None else criterion
-        self.optimizer = get_optimizer(args, model) if optimizer is None else optimizer
-        self.scheduler = get_scheduler(args, self.optimizer) if scheduler is None else scheduler
-        self.checkpointer = Checkpointer(args, model, self.optimizer) if checkpointer is None else checkpointer
+        if not args.test_only:
+            self.criterion = get_criterion(args) if criterion is None else criterion
+            self.optimizer = get_optimizer(args, model) if optimizer is None else optimizer
+            self.scheduler = get_scheduler(args, self.optimizer) if scheduler is None else scheduler
+            self.checkpointer = Checkpointer(args, model, self.optimizer) if checkpointer is None else checkpointer
         self.softmax = torch.nn.Softmax(dim=1)
 
         if 'mobilenet_v3' in self.args.model:

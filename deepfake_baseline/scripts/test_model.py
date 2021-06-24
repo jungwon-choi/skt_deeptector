@@ -34,5 +34,6 @@ os.system('python test.py '+\
           ' --test_sample_num {}'.format(test_sample_num)+\
           ' --random_sample_num {}'.format(random_sample_num)+\
           ' --num_workers {}'.format(num_workers)+\
+          ' --test_only'+\
           ' --verbose'
           )
