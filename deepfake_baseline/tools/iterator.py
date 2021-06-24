@@ -191,7 +191,7 @@ class Iterator():
             fake_acc = mean_accuracy(e_preds[e_labels==1], e_labels[e_labels==1])
             roc_auc = roc_auc_score(np.array(envs_labels[env_name]), np.array(envs_preds[env_name]))
 
-            if self.checkpointer is not None:
+            if not self.args.test_only and self.checkpointer is not None:
                 self.checkpointer.writer.write_result('{}_iteration_acc_{}'.format(phase, env_name), avg_acc, self.checkpointer.writer.current_iter, tb_only=True)
 
             results[env_name] = {'avg_acc': avg_acc, 'real_acc': real_acc, 'fake_acc': fake_acc, 'roc_auc': roc_auc,
@@ -212,7 +212,7 @@ class Iterator():
             total_real_acc = mean_accuracy(t_preds[t_labels==0], t_labels[t_labels==0])
             total_fake_acc = mean_accuracy(t_preds[t_labels==1], t_labels[t_labels==1])
             total_roc_auc = roc_auc_score(np.array(t_labels), np.array(t_preds))
-            if self.checkpointer is not None:
+            if not self.args.test_only and self.checkpointer is not None:
                 self.checkpointer.writer.write_result('{}_acc'.format(phase), total_avg_acc, self.checkpointer.writer.current_iter, tb_only=(phase=='test'))
                 self.checkpointer.writer.write_result('{}_roc_auc'.format(phase), total_roc_auc, self.checkpointer.writer.current_iter, tb_only=(phase=='test'))
                 self.checkpointer.writer.write_result('{}_iteration_acc'.format(phase), total_avg_acc, self.checkpointer.writer.current_iter, tb_only=True)
@@ -220,7 +220,7 @@ class Iterator():
             results['Total (seen)'] = {'avg_acc': total_avg_acc, 'real_acc': total_real_acc, 'fake_acc': total_fake_acc,
                                 'num_real': len(t_labels[t_labels==0]), 'num_fake': len(t_labels[t_labels==1]), 'roc_auc': total_roc_auc}
         else:
-            if self.checkpointer is not None:
+            if not self.args.test_only and self.checkpointer is not None:
                 self.checkpointer.writer.write_result('{}_acc'.format(phase), 0, self.checkpointer.writer.current_iter, tb_only=(phase=='test'))
                 self.checkpointer.writer.write_result('{}_roc_auc'.format(phase), 0, self.checkpointer.writer.current_iter, tb_only=(phase=='test'))
 
@@ -233,7 +233,7 @@ class Iterator():
                 total_real_acc = mean_accuracy(t_preds[t_labels==0], t_labels[t_labels==0])
                 total_fake_acc = mean_accuracy(t_preds[t_labels==1], t_labels[t_labels==1])
                 total_roc_auc = roc_auc_score(np.array(t_labels), np.array(t_preds))
-                if self.checkpointer is not None:
+                if not self.args.test_only and self.checkpointer is not None:
                     if phase=='val':
                         self.checkpointer.writer.write_result('val_acc_us', total_avg_acc, self.checkpointer.writer.current_iter)
                         self.checkpointer.writer.write_result('val_roc_auc_us', total_roc_auc, self.checkpointer.writer.current_iter)
